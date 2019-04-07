@@ -1,0 +1,1 @@
+numpy,matplotlib,pillow,sklearn,requests,jieba, beautifulsoup4,wheel,sympy,pyinstaller,itchat,pandas,pymongo,fake-useragent,jsonpath,lxml,selenium
