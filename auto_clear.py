@@ -1,20 +1,26 @@
 # 定期删除指定日期之前的日志文件
 import os
-import datetime
+import time
+import shutil
 
 # 1、确定文件路径
-path = './'
-# 2、获取文件名称，判断文件时间
-list_dir = os.listdir(path)
-for dir in list_dir:
-    print(dir)
-    if os.path.isfile(dir):
-        os.path.getctime(dir)
-        print('wenjian', datetime.datetime.fromtimestamp(os.path.getctime(dir)))
+path = 'E:\\test'
+# 2、确定要删除的指定天数
+DEL_DAY = 20
+# 3、获取文件名称，判断文件时间，循环删除
+now = time.time()  # 获取当前时间
+for i in range(1, 6):
+    list_dir = os.listdir(path.format(i))
+    if len(list_dir) == 0:
+        print('该目录下没有文件')
+        pass
     else:
-        os.path.getctime(dir)
-        print('wenjianjia')
-# 3、删除指定日期之前的所有文件，文件夹
-delta = datetime.timedelta(days=20)  # 设定365天前的文件为过期
-now = datetime.datetime.now()  # 获取当前时间
-
+        for dir_name in list_dir:
+            if os.path.isdir(path + '\\' + dir_name):
+                time_ = int(now - os.path.getctime(path + '\\' + dir_name)) / 86400
+                if time_ >= 20:
+                    shutil.rmtree(path + '\\' + dir_name)
+            else:
+                time_ = int(now - os.path.getctime(path + '\\' + dir_name)) / 86400
+                if time_ >= 20:
+                    os.remove(path + '\\' + dir_name)
