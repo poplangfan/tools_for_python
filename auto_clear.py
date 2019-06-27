@@ -16,11 +16,10 @@ for i in range(1, 6):
         pass
     else:
         for dir_name in list_dir:
-            if os.path.isdir(path + '\\' + dir_name):
-                time_ = int(now - os.path.getctime(path + '\\' + dir_name)) / 86400
-                if time_ >= 20:
-                    shutil.rmtree(path + '\\' + dir_name)
-            else:
-                time_ = int(now - os.path.getctime(path + '\\' + dir_name)) / 86400
-                if time_ >= 20:
-                    os.remove(path + '\\' + dir_name)
+            time_ = int(now - os.path.getctime(path + '\\' + dir_name)) // 86400
+            if time_ >= 20:
+                if os.path.isdir(path + '\\' + dir_name):
+                        shutil.rmtree(path + '\\' + dir_name)
+                else:
+                        os.remove(path + '\\' + dir_name)
+print('清理完成')
